@@ -21,7 +21,7 @@ spec:
         - name: DT_TAGS
           value: "product=sockshop"
         - name: DT_CUSTOM_PROP
-          value: "SERVICE_TYPE=BACKEND"
+          value: "DT_CUSTOM_PROP_PLACEHOLDER"
         resources:
           limits:
             cpu: 500m
