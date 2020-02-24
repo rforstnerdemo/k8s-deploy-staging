@@ -57,8 +57,8 @@ pipeline {
               customProperties : [
                 [key: 'Jenkins Build Number', value: "${env.BUILD_ID}"],
                 [key: 'Git commit', value: "${env.GIT_COMMIT}"],
-                [key: 'Last commit by', value: "${env.GIT_COMMITTER_NAME}"]
-                [key: 'Branch', value: "${env.GIT_BRANCH}"]
+                [key: 'Last commit by', value: "${env.GIT_COMMITTER_NAME}"],
+                [key: 'Branch', value: "${env.GIT_BRANCH}"],
                 [key: 'SCM', value: "${env.GIT_URL}"]
               ]
             )
