@@ -18,6 +18,7 @@ pipeline {
     string(name: 'TAG_STAGING', defaultValue: '', description: 'The image of the service to deploy.', trim: true)
     string(name: 'VERSION', defaultValue: '', description: 'The version of the service to deploy.', trim: true)
     string(name: 'DT_CUSTOM_PROP', defaultValue: '', description: 'Custom properties to be supplied to Dynatrace.', trim: true)
+    string(name: 'DEPLOY_ONLY', defaultValue: 'FALSE', description: 'Set to true for only running the deployment, no tests.', trim: true)
   }
   agent {
     label 'kubegit'
@@ -71,6 +72,11 @@ pipeline {
     // DO NOT uncomment until 10_01 Lab
     
     stage('Staging Warm Up') {
+      when {
+        expression {
+          return env.DEPLOY_ONLY == 'FALSE'
+        }
+      }
       steps {
         echo "Waiting for the service to start..."
         container('kubectl') {
@@ -111,6 +117,11 @@ pipeline {
     }
 
     stage('Run production ready e2e check in staging') {
+      when {
+        expression {
+          return env.DEPLOY_ONLY == 'FALSE'
+        }
+      }
       steps {
         recordDynatraceSession (
           envId: 'Dynatrace Tenant',
