@@ -18,7 +18,7 @@ pipeline {
     string(name: 'TAG_STAGING', defaultValue: '', description: 'The image of the service to deploy.', trim: true)
     string(name: 'VERSION', defaultValue: '', description: 'The version of the service to deploy.', trim: true)
     string(name: 'DT_CUSTOM_PROP', defaultValue: '', description: 'Custom properties to be supplied to Dynatrace.', trim: true)
-    choice(name: 'QUALITYGATE_PROVIDER', choices: ['None','Keptn Quality Gates','Performance Signature Plugin'], defaultValue: 'Performance Signature Plugin', description: 'Select your evaluation provider. \'None\' will not evaluate', trim: true)
+    choice(name: 'QUALITYGATE_PROVIDER', choices: ['Performance Signature Plugin','Keptn Quality Gates', 'None'], description: 'Select your evaluation provider. \'None\' will not evaluate', trim: true)
   }
   agent {
     label 'kubegit'
