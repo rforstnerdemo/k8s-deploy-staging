@@ -167,7 +167,7 @@ pipeline {
         }
       }
       steps {
-        build job: "sockshop/{env.APP_NAME}.keptn/master"
+        build job: "sockshop/${env.APP_NAME}.keptn/master"
       }
     }
     
