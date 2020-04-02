@@ -19,6 +19,7 @@ pipeline {
     string(name: 'VERSION', defaultValue: '', description: 'The version of the service to deploy.', trim: true)
     string(name: 'DT_CUSTOM_PROP', defaultValue: '', description: 'Custom properties to be supplied to Dynatrace.', trim: true)
     string(name: 'DEPLOY_ONLY', defaultValue: 'FALSE', description: 'Set to true for only running the deployment, no tests.', trim: true)
+    string(name: 'KEPTN_QG', defaultValue: 'FALSE', description: 'Set to true to initiate Keptn QG Evaluation.', trim: true)
   }
   agent {
     label 'kubegit'
@@ -157,6 +158,16 @@ pipeline {
           nonFunctionalFailure: 2, 
           specFile: "monspec/e2e_perfsig.json"
         )
+      }
+    }
+    stage('Keptn Quality Gate') {
+      when {
+        expression {
+          return env.KEPTN_QG == 'TRUE'
+        }
+      }
+      steps {
+        build job: "sockshop/{env.APP_NAME}.keptn/master"
       }
     }
     
