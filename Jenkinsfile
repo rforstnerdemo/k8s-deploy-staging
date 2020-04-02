@@ -18,8 +18,7 @@ pipeline {
     string(name: 'TAG_STAGING', defaultValue: '', description: 'The image of the service to deploy.', trim: true)
     string(name: 'VERSION', defaultValue: '', description: 'The version of the service to deploy.', trim: true)
     string(name: 'DT_CUSTOM_PROP', defaultValue: '', description: 'Custom properties to be supplied to Dynatrace.', trim: true)
-    boolean(name: 'EVAL_PS', defaultValue: false, description: 'Set to true for only running the deployment, no tests.', trim: true)
-    boolean(name: 'EVAL_KEPTN_QG', defaultValue: false, description: 'Set to true to initiate Keptn QG Evaluation.', trim: true)
+    choice(name: 'QUALITYGATE_PROVIDER', choices: ['None','Keptn Quality Gates','Performance Signature Plugin'], defaultValue: 'Performance Signature Plugin', description: 'Select your evaluation provider. \'None\' will not evaluate', trim: true)
   }
   agent {
     label 'kubegit'
@@ -76,7 +75,7 @@ pipeline {
     stage('Staging Warm Up') {
       when {
         expression {
-          return env.EVAL_PS == 'TRUE'
+          return params.QUALITYGATE_PROVIDER == 'Performance Signature Plugin'
         }
       }
       steps {
@@ -121,7 +120,7 @@ pipeline {
     stage('Run production ready e2e check in staging') {
       when {
         expression {
-          return env.EVAL_PS == 'TRUE'
+          return params.QUALITYGATE_PROVIDER == 'Performance Signature Plugin'
         }
       }
       steps {
@@ -164,7 +163,7 @@ pipeline {
     stage('Keptn Quality Gate') {
       when {
         expression {
-          return env.EVAL_KEPTN_QG == 'TRUE'
+          return params.QUALITYGATE_PROVIDER == 'Keptn Quality Gates'
         }
       }
       steps {
