@@ -35,6 +35,7 @@ pipeline {
             sh "cd k8s-deploy-staging/ && sed -i 's#image: .*#image: ${env.TAG_STAGING}#' manifest-gen/${env.APP_NAME}.yml"
             sh "cd k8s-deploy-staging/ && git add manifest-gen/${env.APP_NAME}.yml && git commit -m 'Update ${env.APP_NAME} version ${env.VERSION}'"
             sh "cd k8s-deploy-staging/ && git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${env.GITHUB_ORGANIZATION}/k8s-deploy-staging"
+            sh "rm -rf k8s-deploy-staging"
           }
         }
       }
