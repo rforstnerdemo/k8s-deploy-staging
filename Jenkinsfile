@@ -160,7 +160,7 @@ pipeline {
         )
       }
     }
-    stage('Keptn Quality Gate') {
+/*    stage('Keptn Quality Gate') {
       when {
         expression {
           return params.QUALITYGATE_PROVIDER == 'Keptn Quality Gates'
@@ -170,6 +170,6 @@ pipeline {
         build job: "sockshop/${env.APP_NAME}.keptn/master"
       }
     }
-    
+  */  
   }
 }
