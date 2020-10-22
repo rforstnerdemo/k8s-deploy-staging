@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
       - name: carts
-        image: 172.20.131.27:5000/library/sockshop/carts-0.25.0
+        image: 172.20.131.27:5000/library/sockshop/carts-0.24.0
         env:
         - name: JAVA_OPTS
           value: -Xms128m -Xmx512m -XX:PermSize=128m -XX:MaxPermSize=128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom
         - name: DT_TAGS
           value: "product=sockshop"
         - name: DT_CUSTOM_PROP
-          value: "keptn_project=sockshop-qg keptn_service=carts keptn_stage=hardening SCM=https://github.com/rforstnerdemo/carts.git Branch=release/0.25.0 Version=0.25.0 Owner=ace@dynatrace.com FriendlyName=sockshop.carts SERVICE_TYPE=BACKEND Project=sockshop DesignDocument=https://sock-corp.com/stories/carts Class=GOLD Remediation=Ansible"
+          value: "keptn_project=sockshop-qg keptn_service=carts keptn_stage=hardening SCM=https://github.com/rforstnerdemo/carts.git Branch=release/0.24.0 Version=0.24.0 Owner=ace@dynatrace.com FriendlyName=sockshop.carts SERVICE_TYPE=BACKEND Project=sockshop DesignDocument=https://sock-corp.com/stories/carts Class=GOLD Remediation=Ansible"
         resources:
           limits:
             cpu: 500m
