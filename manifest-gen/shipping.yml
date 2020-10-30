@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: shipping
-        image: 172.20.35.160:5000/library/sockshop/shipping-0.8.0
+        image: 172.20.141.70:5000/library/sockshop/shipping-0.8.0
         env:
         - name: JAVA_OPTS
           value: -Xms128m -Xmx512m -XX:PermSize=128m -XX:MaxPermSize=128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom
