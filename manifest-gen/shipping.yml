@@ -1,11 +1,14 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shipping
   namespace: staging
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: shipping
   template:
     metadata:
       labels:
@@ -14,7 +17,7 @@ spec:
     spec:
       containers:
       - name: shipping
-        image: 172.20.44.81:5000/library/sockshop/shipping-0.8.0
+        image: shipping
         env:
         - name: JAVA_OPTS
           value: -Xms128m -Xmx512m -XX:PermSize=128m -XX:MaxPermSize=128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom
