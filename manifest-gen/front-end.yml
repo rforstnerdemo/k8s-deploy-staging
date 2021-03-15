@@ -1,11 +1,14 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: front-end
   namespace: staging
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: front-end
   template:
     metadata:
       labels:
@@ -14,7 +17,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: 172.20.243.188:5000/library/sockshop/front-end-0.7.0
+        image: front-end
         env: 
         - name: DT_TAGS
           value: "product=sockshop"
